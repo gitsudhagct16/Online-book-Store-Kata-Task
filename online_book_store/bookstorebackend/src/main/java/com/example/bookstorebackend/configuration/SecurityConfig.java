@@ -8,6 +8,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+
+
 @Configuration
 public class SecurityConfig {
 
@@ -42,4 +44,5 @@ public class SecurityConfig {
         bean.setOrder(1); // Run before JWT filter
         return bean;
     }
+
 }

@@ -19,7 +19,7 @@ public class UserService {
         }
 
         // Encrypt the password before saving
-        System.out.println("xxxx"+request.toString());
+
         String encodedPassword = Service.encode(request.getPassword());
 
         User user = new User();
