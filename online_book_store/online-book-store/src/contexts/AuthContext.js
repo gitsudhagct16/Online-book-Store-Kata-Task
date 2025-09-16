@@ -64,12 +64,8 @@ export const AuthProvider = ({ children }) => {
       setAuthLoading(true);
       setAuthError(null);
 
-      const { user: newUser, token: userToken } = await registerUser(userData);
+      return await registerUser(userData)
 
-      setUser(newUser);
-      setToken(userToken);
-
-      return { success: true };
     } catch (error) {
       const errorMessage = error.message || 'Registration failed. Please try again.';
       setAuthError(errorMessage);

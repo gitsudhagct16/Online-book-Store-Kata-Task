@@ -125,6 +125,13 @@ const AppContent = () => {
       const updatedCart = await apiClearCart();
       setCart(updatedCart);
       setCurrentPage('books');
+
+      // Navigate to home page
+      window.location.href = "/";
+
+      // Reload the page
+      window.location.reload();
+
     } catch (err) {
       console.error('Failed to clear cart after order:', err);
     }
@@ -182,9 +189,11 @@ const AppContent = () => {
       return (
         <Register
           onRegister={async (userData) => {
+
             const result = await register(userData);
+
             if (result.success) {
-              setCurrentPage('books');
+              setAuthPage('login')
             }
           }}
           onSwitchToLogin={() => setAuthPage('login')}

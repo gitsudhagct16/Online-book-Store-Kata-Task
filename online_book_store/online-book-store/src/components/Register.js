@@ -79,7 +79,7 @@ const Register = ({ onRegister, onSwitchToLogin, loading, error }) => {
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Full Name *</Form.Label>
+                  <Form.Label>Full Name <span style={{ color: 'red' }}>*</span></Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter your full name"
@@ -94,7 +94,8 @@ const Register = ({ onRegister, onSwitchToLogin, loading, error }) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Email Address *</Form.Label>
+                  <Form.Label>Email Address <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="Enter your email"
@@ -109,7 +110,8 @@ const Register = ({ onRegister, onSwitchToLogin, loading, error }) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Password *</Form.Label>
+                  <Form.Label>Password <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Enter password (min 6 characters)"
@@ -124,7 +126,7 @@ const Register = ({ onRegister, onSwitchToLogin, loading, error }) => {
                 </Form.Group>
 
                 <Form.Group className="mb-4">
-                  <Form.Label>Confirm Password *</Form.Label>
+                  <Form.Label>Confirm Password <span style={{ color: 'red' }}>*</span></Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Confirm your password"

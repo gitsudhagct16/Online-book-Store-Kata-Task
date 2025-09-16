@@ -91,20 +91,42 @@
 //   }
 // ];
 
+let BASE_URL = "http://localhost:8080/"
+
+export const saveRefreshedToken = (response) => {
+  const refreshedToken = response.headers.get("X-Refreshed-Token");
+  if (refreshedToken) {
+    localStorage.setItem("bookstore_token", refreshedToken);
+
+  }
+}
+
 export const getBooks = async () => {
+
   try {
-  const response = await fetch("http://localhost:8080/api/books");
- 
-  if (!response.ok) {
-  throw new Error(`HTTP error! status: ${response.status}`);
-  }
- 
-  const data = await response.json();
-  return data; // assuming your backend returns an array of books
+    const token = localStorage.getItem("bookstore_token");
+
+    const response = await fetch(BASE_URL + "api/books", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    saveRefreshedToken(response);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
-  throw new Error(`Failed to fetch books: ${error.message}`);
+    console.log("error", error);
+    throw new Error(`Failed to fetch books: ${error.message}`);
   }
- };
+
+};
 export const validateOrder = (orderData) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -129,7 +151,6 @@ export const validateOrder = (orderData) => {
         reject(new Error('Cart cannot be empty'));
         return;
       }
-debugger
       resolve({
         orderId: `ORDER-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
         status: 'confirmed',
@@ -157,82 +178,64 @@ const mockUsers = [];
 let currentUser = null;
 let userCartItems = [];
 
-export const loginUser = (credentials) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const { email, password } = credentials;
 
-      // Check for demo accounts
-      if (email === 'admin@gmail.com' && password === 'admin123') {
-        const user = {
-          id: 1,
-          name: 'Sudha',
-          email: 'admin@gmail.com'
-        };
-        currentUser = user;
-        const token = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+export const loginUser = async (credentials) => {
+  try {
+    const response = await fetch(BASE_URL + "api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(credentials)
+    });
 
-        // Store in localStorage
-        localStorage.setItem('bookstore_token', token);
-        localStorage.setItem('bookstore_user', JSON.stringify(user));
+    if (!response.ok) {
+      throw new Error(`Login failed: ${response.status}`);
+    }
 
-        resolve({ user, token });
-        return;
-      }
+    const data = await response.json();
 
-      // Check registered users
-      const user = mockUsers.find(u => u.email === email && u.password === password);
-      if (user) {
-        currentUser = { ...user };
-        delete currentUser.password; // Don't return password
-        const token = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    // Assuming backend returns { token, name }
+    const { token, name } = data;
 
-        // Store in localStorage
-        localStorage.setItem('bookstore_token', token);
-        localStorage.setItem('bookstore_user', JSON.stringify(currentUser));
+    // Construct user object like your mock version
+    const user = {
+      id: Date.now(), // or use a real ID if backend provides it
+      name,
+      email: credentials.email
+    };
 
-        resolve({ user: currentUser, token });
-      } else {
-        reject(new Error('Invalid email or password'));
-      }
-    }, 1000);
-  });
+    // Save to localStorage
+    localStorage.setItem("bookstore_token", token);
+    localStorage.setItem("bookstore_user", JSON.stringify(user));
+
+    return { user, token };
+  } catch (error) {
+    throw new Error(`Login error: ${error.message}`);
+  }
 };
 
-export const registerUser = (userData) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const { name, email, password } = userData;
 
-      // Check if user already exists
-      const existingUser = mockUsers.find(u => u.email === email);
-      if (existingUser) {
-        reject(new Error('User with this email already exists'));
-        return;
-      }
+export const registerUser = async (userData) => {
 
-      // Create new user
-      const newUser = {
-        id: mockUsers.length + 2,
-        name,
-        email,
-        password,
-        createdAt: new Date().toISOString()
-      };
+  try {
+    const { name, email, password } = userData;
 
-      mockUsers.push(newUser);
-      currentUser = { ...newUser };
-      delete currentUser.password; // Don't return password
+    const response = await fetch(BASE_URL + "api/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password, name })
+    });
 
-      const token = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-
-      // Store in localStorage
-      localStorage.setItem('bookstore_token', token);
-      localStorage.setItem('bookstore_user', JSON.stringify(currentUser));
-
-      resolve({ user: currentUser, token });
-    }, 1200);
-  });
+    if (!response.ok) {
+      throw new Error(`Register failed: ${response.status}`);
+    }
+    return { success: true }
+  } catch (error) {
+    throw new Error(`Register error: ${error.message}`);
+  }
 };
 
 export const logoutUser = () => {
@@ -295,6 +298,7 @@ export const getCartItems = () => {
 export const addToCart = (book, quantity = 1) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
+
       if (!currentUser) {
         reject(new Error('User not authenticated'));
         return;
@@ -377,49 +381,71 @@ export const clearCart = () => {
   });
 };
 
-export const processOrder = (orderData) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (!currentUser) {
-        reject(new Error('User not authenticated'));
-        return;
-      }
+export const processOrder = async (orderData) => {
+  try {
+    const currentUser = JSON.parse(localStorage.getItem("bookstore_user"));
 
-      const { cartItems, user } = orderData;
+    if (!currentUser) {
+      throw new Error("User not authenticated");
+    }
 
-      if (!user) {
-        reject(new Error('User information is required'));
-        return;
-      }
+    const { cartItems, user } = orderData;
 
-      if (!user.name || user.name.trim().length < 2) {
-        reject(new Error('Valid user name is required'));
-        return;
-      }
+    if (!user) {
+      throw new Error("User information is required");
+    }
 
-      if (!user.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
-        reject(new Error('Valid user email is required'));
-        return;
-      }
+    if (!user.name || user.name.trim().length < 2) {
+      throw new Error("Valid user name is required");
+    }
 
-      if (cartItems.length === 0) {
-        reject(new Error('Cart is empty'));
-        return;
-      }
-debugger
-      // Simulate order processing
-      const orderId = `ORDER-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+    if (!user.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+      throw new Error("Valid user email is required");
+    }
 
-      // Clear cart after successful order
-      userCartItems = [];
-      localStorage.setItem('bookstore_cart', JSON.stringify(userCartItems));
+    if (!cartItems || cartItems.length === 0) {
+      throw new Error("Cart is empty");
+    }
 
-      resolve({
-        orderId,
-        status: 'confirmed',
-        estimatedDelivery: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-        orderDate: new Date().toLocaleDateString()
-      });
-    }, 1500);
-  });
+    const token = localStorage.getItem("bookstore_token");
+
+    let reqBody = {
+      cartItems: cartItems.map((item) => ({
+        id: item.id,
+        quantity: item.quantity
+      }))
+    };
+
+    const response = await fetch(BASE_URL + "api/cart/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(reqBody)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Order failed: ${response.status}`);
+    }
+    // Clear cart after successful order
+    localStorage.setItem("bookstore_cart", JSON.stringify([]));
+
+    const orderId = `ORDER-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+
+    return {
+      orderId,
+      status: "confirmed",
+      estimatedDelivery: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+      orderDate: new Date().toLocaleDateString(),
+    };
+  } catch (error) {
+  
+    console.error("Order processing error:", error.message);
+    return {
+      error: true,
+      message: error.message
+    };
+  }
 };
+

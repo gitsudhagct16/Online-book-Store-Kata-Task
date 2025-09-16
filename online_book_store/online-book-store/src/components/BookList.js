@@ -89,7 +89,7 @@ const BookList = ({ books, onAddToCart, loading, error, cartLoading }) => {
                 </Card.Text>
 
                 <div className="mt-auto">
-                  {/* <div className="d-flex justify-content-between align-items-center mb-2">
+                  <div className="d-flex justify-content-between align-items-center mb-2">
                     <strong className="text-primary fs-5">
                       ₹{book.price.toFixed(2)}
                     </strong>
@@ -104,7 +104,7 @@ const BookList = ({ books, onAddToCart, loading, error, cartLoading }) => {
                         </span>
                       )}
                     </small>
-                  </div> */}
+                  </div>
 
                   <Button
                     variant="primary"

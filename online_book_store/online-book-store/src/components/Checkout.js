@@ -22,6 +22,7 @@ const Checkout = ({ cartItems, totalPrice, onOrderComplete, onBackToCart, user }
       };
 
       const confirmation = await processOrder(orderData);
+
       setOrderConfirmation(confirmation);
       setShowConfirmation(true);
 
