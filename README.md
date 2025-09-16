@@ -1,5 +1,9 @@
 # Online-book-Store-Kata-Task
 React and Spring boot Project with TDD Approach
+
+backend code location -->online_book_store/bookstorebackend
+
+frontend code loaction --->
 Sample data
 --------------------------------------------------------------------
 Book Entity
@@ -18,6 +22,4 @@ VALUES
 (10, 'Introduction to Algorithms', 'Thomas H. Cormen', 1200.00, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1387741681i/108986.jpg', 10);
 
 
-Login Entity
-============
-INSERT INTO customer(username, password) VALUES ('admin@gmail.com', 'admin123');
+
