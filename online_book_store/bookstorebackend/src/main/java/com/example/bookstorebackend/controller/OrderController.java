@@ -1,13 +1,11 @@
 package com.example.bookstorebackend.controller;
 
 import com.example.bookstorebackend.dto.Order;
-import com.example.bookstorebackend.model.Book;
-import com.example.bookstorebackend.service.BookService;
+import com.example.bookstorebackend.dto.OrderRequest;
+import com.example.bookstorebackend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.bookstorebackend.service.OrderService;
-import com.example.bookstorebackend.dto.OrderRequest;
 
 import java.util.List;
 
@@ -23,6 +21,7 @@ public class OrderController {
 
     @PostMapping("/order")
     public ResponseEntity<String> placeOrder(@RequestBody OrderRequest orderRequest) {
+// function to place order
         List<Order> cartItems = orderRequest.getCartItems();
         orderService.placeOrder(cartItems); // Update service method accordingly
         return ResponseEntity.ok("Order Placed");
