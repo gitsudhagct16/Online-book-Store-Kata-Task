@@ -1,9 +1,24 @@
-# Online-book-Store-Kata-Task
+# Online-book-Store
 React and Spring boot Project with TDD Approach
 
-backend code location -->online_book_store/bookstorebackend
+backend code location -->online_book_store/bookstorebackend 
 
-frontend code loaction --->
+frontend code location ---> online_book_store/online-book-store
+
+It includes:
+
+✅ Project overview
+---------------------------------------------------
+🛠 Technologies used - React, java 8, H2 Database
+
+🚀 Setup instructions - frontend and backend code available. please use dataset given below
+
+🔐 Security details -Basic Authentication(JWT)
+
+📦 API endpoints-REST ,Postman
+
+🧪 Testing guide - Unit Testing
+
 Sample data
 --------------------------------------------------------------------
 Book Entity
