@@ -17,7 +17,7 @@ public class AuthResponse {
         this.token = token;
     }
 
-    public AuthResponse(String message, Long userId ) {
+    public AuthResponse(String message, Long userId) {
         this.message = message;
         this.userId = userId;
     }

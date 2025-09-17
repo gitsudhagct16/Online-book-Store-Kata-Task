@@ -6,6 +6,7 @@ import com.example.bookstorebackend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -14,9 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
+@AutoConfigureMockMvc(addFilters = false) // ✅ disables JwtAuthFilter for test
 class UserControllerTest {
 
     @Autowired
@@ -30,25 +33,28 @@ class UserControllerTest {
 
     @Test
     void register_shouldReturnAuthResponse() throws Exception {
+        // Arrange
         User user = new User();
         user.setEmail("sudha@example.com");
         user.setName("Sudha");
-       user.setPassword("password123");
+        user.setPassword("password123");
 
         AuthResponse response = new AuthResponse("User registered successfully", 1L);
 
         when(authService.register(any(User.class))).thenReturn(response);
 
+        // Act & Assert
         mockMvc.perform(post("/api/user/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("User registered successfully"))
                 .andExpect(jsonPath("$.userId").value(1));
     }
 
     @Test
     void login_shouldReturnAuthResponseWithToken() throws Exception {
+        // Arrange
         User user = new User();
         user.setEmail("sudha@example.com");
         user.setPassword("password123");
@@ -57,6 +63,7 @@ class UserControllerTest {
 
         when(authService.login(any(User.class))).thenReturn(response);
 
+        // Act & Assert
         mockMvc.perform(post("/api/user/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))

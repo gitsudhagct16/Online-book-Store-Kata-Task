@@ -7,7 +7,8 @@ public class OrderRequest {
     private List<Order> cartItems;
 
     // Constructors
-    public OrderRequest() {}
+    public OrderRequest() {
+    }
 
     public OrderRequest(List<Order> cartItems) {
         this.cartItems = cartItems;

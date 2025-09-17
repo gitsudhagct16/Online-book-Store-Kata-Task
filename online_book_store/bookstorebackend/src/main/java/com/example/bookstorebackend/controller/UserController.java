@@ -4,6 +4,8 @@ import com.example.bookstorebackend.dto.AuthResponse;
 import com.example.bookstorebackend.model.User;
 import com.example.bookstorebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,13 +17,14 @@ public class UserController {
     private UserService authService;
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody User request) {
-        return authService.register(request);
+    public ResponseEntity<AuthResponse> register(@RequestBody User request) {
+        AuthResponse response = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response); // ✅ 201 Created
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody User request) {
-        return authService.login(request);
+    public ResponseEntity<AuthResponse> login(@RequestBody User request) {
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response); // ✅ 200 OK
     }
-
 }

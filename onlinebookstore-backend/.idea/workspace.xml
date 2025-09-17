@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4857ec40-16a4-4955-90e3-0607c9d0071b" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="32iuS7PckbPPgEM7oYIWcBaihAD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BookApplication.executor": "Run",
+    "Application.OnlinebookstoreApplication.executor": "Run",
+    "JUnit.All in onlinebookstore (1).executor": "Coverage",
+    "JUnit.All in onlinebookstore (2).executor": "Run",
+    "JUnit.All in onlinebookstore (3).executor": "Run",
+    "JUnit.All in onlinebookstore (4).executor": "Run",
+    "JUnit.All in onlinebookstore.executor": "Run",
+    "JUnit.BookControllerTest.testGetAllProducts.executor": "Run",
+    "JUnit.OnlinebookstoreApplicationTests.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/sudha/Documents/Learnings/React/React_Learnings/online_book_store/bookstorebackend"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.BookApplication">
+    <configuration name="BookApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.onlinebookstore.BookApplication" />
+      <module name="onlinebookstore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.onlinebookstore.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in onlinebookstore (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="onlinebookstore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in onlinebookstore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="onlinebookstore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="onlinebookstore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.onlinebookstore.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.onlinebookstore" />
+      <option name="MAIN_CLASS_NAME" value="com.example.onlinebookstore.BookApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookControllerTest.testGetAllProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="onlinebookstore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.onlinebookstore.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.onlinebookstore.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.example.onlinebookstore.controller.BookControllerTest" />
+      <option name="METHOD_NAME" value="testGetAllProducts" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BookApplication" />
+        <item itemvalue="JUnit.BookControllerTest.testGetAllProducts" />
+        <item itemvalue="JUnit.All in onlinebookstore" />
+        <item itemvalue="JUnit.BookApplicationTests" />
+        <item itemvalue="JUnit.All in onlinebookstore (4)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4857ec40-16a4-4955-90e3-0607c9d0071b" name="Changes" comment="" />
+      <created>1757915710828</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1757915710828</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/onlinebookstore$All_in_onlinebookstore__1_.ic" NAME="All in onlinebookstore (1) Coverage Results" MODIFIED="1757935177163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/onlinebookstore$All_in_onlinebookstore__4_.ic" NAME="All in onlinebookstore (4) Coverage Results" MODIFIED="1757959141384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

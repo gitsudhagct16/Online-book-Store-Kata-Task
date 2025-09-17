@@ -36,7 +36,7 @@ public class UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
         // Decode and compare the password
-        System.out.println("user"+ user.toString());
+        System.out.println("user" + user.toString());
         String decodedPassword = Service.decode(user.getPassword());
         if (!decodedPassword.equals(request.getPassword())) {
             throw new RuntimeException("Invalid email or password");

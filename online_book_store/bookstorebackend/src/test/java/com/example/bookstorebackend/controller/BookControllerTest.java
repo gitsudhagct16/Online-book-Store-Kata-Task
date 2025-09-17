@@ -1,12 +1,12 @@
-
 package com.example.bookstorebackend.controller;
 
 import com.example.bookstorebackend.model.Book;
 import com.example.bookstorebackend.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -14,9 +14,11 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BookController.class)
+@AutoConfigureMockMvc(addFilters = false) // ✅ disables JwtAuthFilter
 class BookControllerTest {
 
     @Autowired
@@ -30,7 +32,8 @@ class BookControllerTest {
         Book book = new Book(1L, "Spring Boot", "Sudha", 499.0, "image.jpg", 10);
         when(bookService.getAllBooks()).thenReturn(List.of(book));
 
-        mockMvc.perform(get("/api/books"))
+        mockMvc.perform(get("/api/books")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value("Spring Boot"))
                 .andExpect(jsonPath("$[0].author").value("Sudha"))
